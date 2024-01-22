@@ -39,4 +39,24 @@ public class EventController {
         return "redirect:/events";
     }
 
+//    create handler method that displays the form we will use
+    @GetMapping("delete")
+    public String displayDeleteEventForm(Model model) {
+        model.addAttribute("title", "Delete Events");
+        model.addAttribute("events", EventData.getAll());
+        return "events/delete";
+    }
+
+    @PostMapping("delete")
+    public String processDeleteEventsForm(@RequestParam int[] eventIds) {
+//        IMPORTANT: parameter "eventIds" is the same as the name attribute of the form element delete
+
+        for (int id : eventIds) {
+            EventData.remove(id);
+        }
+
+//        redirect back to event listing (nothing after : because redirecting to index)
+        return "redirect:";
+    }
+
 }

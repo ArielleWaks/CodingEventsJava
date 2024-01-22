@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container">
+
+<header th:replace="fragments :: header"></header>
+
+<form method="post">
+<!--    don't need to add action because it will post to the same endpoint URL the form is displayed-->
+
+<!--    render checkboxes for form-->
+    <th:block th:each="event : ${events}">
+        <div class="form-group">
+        <label>
+            <span th:text="${event.name}"></span>
+            <input type="checkbox" name="eventIds" th:value="${event.id}" class="form-control">
+<!--                name "eventIds" is what is submitted to the server; a collection of Ids-->
+<!--                value is data that is submitted if a box is selected to delete event-->
+<!--                remove(int id) method in EventData class requires the id of the event to remove it-->
+<!--                bootstrap class if form-control-->
+        </label>
+        </div>
+    </th:block>
+
+    <input type="submit" value="Delete" class="btn btn-danger">
+</form>
+
+</body>
+</html>
