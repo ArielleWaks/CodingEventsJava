@@ -8,12 +8,14 @@
 <form method="post">
     <div class="form-group">
         <label> Name
-            <input type="text" name="eventName" class="form-control">
+            <input type="text" name="name" class="form-control">
+<!--            name "name" has to match Event object field name "name" for Spring to model bind and know how to assign properties for newEvent-->
         </label>
     </div>
     <div class="form-group">
         <label> Description
-            <input type="text" name="eventDescription" class="form-control">
+            <input type="text" name="description" class="form-control">
+<!--            name "description matches Event field for model binding-->
         </label>
     </div>
     <br>
