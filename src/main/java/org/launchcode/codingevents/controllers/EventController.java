@@ -48,11 +48,12 @@ public class EventController {
     }
 
     @PostMapping("delete")
-    public String processDeleteEventsForm(@RequestParam int[] eventIds) {
+    public String processDeleteEventsForm(@RequestParam(required = false) int[] eventIds) {
 //        IMPORTANT: parameter "eventIds" is the same as the name attribute of the form element delete
-
-        for (int id : eventIds) {
-            EventData.remove(id);
+        if (eventIds != null) {
+            for (int id : eventIds) {
+                EventData.remove(id);
+            }
         }
 
 //        redirect back to event listing (nothing after : because redirecting to index)
