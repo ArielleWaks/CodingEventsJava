@@ -1,8 +1,10 @@
 package org.launchcode.codingevents.controllers;
 
+import jakarta.validation.Valid;
 import org.launchcode.codingevents.data.EventData;
 import org.launchcode.codingevents.models.Event;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
@@ -30,8 +32,18 @@ public class EventController {
     }
 
     @PostMapping("create")
-    public String processCreateEventForm(@ModelAttribute Event newEvent) {
-//        when @ModelAttribute is called, Sping will create the newEvent object for us given the name and description values in the request
+    public String processCreateEventForm(@ModelAttribute @Valid Event newEvent,
+                                         Errors errors, Model model) {
+//        when @ModelAttribute is called, Spring will create the newEvent object for us given the name and description values in the request
+//        ensure not saving invalid data with @Valid
+//        add new Errors object
+        if(errors.hasErrors()) {
+            //hasErrors is a boolian
+            //go back to event create form
+            model.addAttribute("title", "Create Event"); //add Model parameter
+            model.addAttribute("errorMsg", "Bad data."); //add errorMsg attribute to create template
+            return "events/create";
+        }
         EventData.add(newEvent);
         return "redirect:/events";
     }
