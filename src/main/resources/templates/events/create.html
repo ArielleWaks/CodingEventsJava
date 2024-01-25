@@ -5,26 +5,33 @@
 
 <header th:replace="fragments :: header"></header>
 
-<p th:text="${errorMsg}" style="color:red;"></p>
+<!--<p th:text="${errorMsg}" style="color:red;"></p>-->
 <!--errorMsg attribute from EventController processCreateEventForm-->
 
 <form method="post">
     <div class="form-group">
         <label> Name
-            <input type="text" name="name" class="form-control">
+            <input th:field="${event.name}" class="form-control">
 <!--            name "name" has to match Event object field name "name" for Spring to model bind and know how to assign properties for newEvent-->
+<!--            replace type="text" name="name" with th:field to tell Thymeleaf to correspond to name field in event object-->
+<!--            Thymeleaf will create corresponding name field attribute and input types for me-->
         </label>
+        <p class="error" th:errors="${event.name}"></p>
+<!--        input validation can replace errorMsg attribute tag above-->
+<!--        class="error" is to tie to stylesheet-->
     </div>
     <div class="form-group">
         <label> Description
-            <input type="text" name="description" class="form-control">
+            <input th:field="${event.description}" class="form-control">
 <!--            name "description matches Event field for model binding-->
         </label>
+        <p class="error" th:errors="${event.description}"></p>
     </div>
     <div class="form-group">
         <label> Contact Email
-            <input type="text" name="contactEmail" class="form-control">
+            <input th:field="${event.contactEmail}" class="form-control">
         </label>
+        <p class="error" th:errors="${event.contactEmail}"></p>
     </div>
     <br>
     <div class="form-group">

@@ -28,6 +28,7 @@ public class EventController {
     @GetMapping("create")
     public String displayCreateEventForm(Model model) {
         model.addAttribute("title", "Create Event");
+        model.addAttribute(new Event()); //use information in create template to render form more efficiently
         return "events/create";
     }
 
@@ -41,7 +42,7 @@ public class EventController {
             //hasErrors is a boolian
             //go back to event create form
             model.addAttribute("title", "Create Event"); //add Model parameter
-            model.addAttribute("errorMsg", "Bad data."); //add errorMsg attribute to create template
+//            model.addAttribute("errorMsg", "Bad data."); //add errorMsg attribute to create template
             return "events/create";
         }
         EventData.add(newEvent);
