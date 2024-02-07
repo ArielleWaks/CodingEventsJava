@@ -11,6 +11,8 @@ import java.util.Map;
  */
 public class EventData {
 
+    //data layer
+
     private static final Map<Integer, Event> events = new HashMap<>();
 
     public static Collection<Event> getAll() {
