@@ -67,6 +67,7 @@ public class EventController {
         }
 
         eventRepository.save(newEvent);
+        //sub-object also needs to be saved via cascade
         return "redirect:/events";
     }
 
